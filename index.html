@@ -107,8 +107,28 @@
       100% { transform: translateY(0); }
     }
 
+    @keyframes btn-shine {
+      0%        { left: -80px; opacity: 0; }
+      10%       { opacity: 1; }
+      50%, 100% { left: 110%; opacity: 0; }
+    }
+
     .btn--float {
       animation: float-btn 2.2s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn--float::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -80px;
+      width: 60px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+      animation: btn-shine 3.5s ease-in-out 2s infinite;
+      pointer-events: none;
     }
 
     .btn--float:hover {
@@ -141,13 +161,13 @@
     /* ===== フェードインアニメーション ===== */
     .fade-in {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px) scale(0.97);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     .fade-in.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
     /* ===== レスポンシブ（600px以下） ===== */
@@ -330,19 +350,37 @@
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .style-block__img-wrap img {
       width: 100%;
       height: auto;
       display: block;
+      transition: transform 0.4s ease;
     }
 
     .style-block:hover .style-block__img-wrap {
       transform: scale(1.02);
       box-shadow: 0 10px 28px rgba(74, 55, 40, 0.18);
     }
+
+    /* ギャラリー：ホバー時の軽い揺れ */
+    @keyframes gallery-sway {
+      0%   { transform: rotate(0deg) scale(1.02); }
+      25%  { transform: rotate(-1deg) scale(1.02); }
+      75%  { transform: rotate(1deg) scale(1.02); }
+      100% { transform: rotate(0deg) scale(1.02); }
+    }
+
+    .style-block:hover .style-block__img-wrap {
+      animation: gallery-sway 0.5s ease-in-out;
+    }
+
+    /* ギャラリー：時間差フェードイン */
+    .style-block.fade-in:nth-child(1) { transition-delay: 0s; }
+    .style-block.fade-in:nth-child(2) { transition-delay: 0.18s; }
+    .style-block.fade-in:nth-child(3) { transition-delay: 0.36s; }
 
     .style-block--featured .style-block__img-wrap {
       box-shadow: 0 6px 24px rgba(255, 140, 105, 0.25);
@@ -437,6 +475,12 @@
       overflow: hidden;
     }
 
+    /* 装飾円パルス */
+    @keyframes pulse-circle {
+      0%, 100% { transform: scale(1);    opacity: 1; }
+      50%       { transform: scale(1.18); opacity: 0.65; }
+    }
+
     /* 装飾円（左上） */
     .hero::before {
       content: '';
@@ -448,6 +492,7 @@
       border-radius: 50%;
       background: rgba(255, 140, 105, 0.12);
       pointer-events: none;
+      animation: pulse-circle 5s ease-in-out infinite;
     }
 
     /* 装飾円（右下） */
@@ -461,6 +506,7 @@
       border-radius: 50%;
       background: rgba(168, 213, 162, 0.18);
       pointer-events: none;
+      animation: pulse-circle 6.5s ease-in-out 1.2s infinite;
     }
 
     .hero__badge {
@@ -473,6 +519,56 @@
       border-radius: 50px;
       margin-bottom: 20px;
     }
+
+    /* ===== タスクA：ヒーローアニメーション ===== */
+
+    @keyframes hero-line-in {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float-img {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-14px); }
+    }
+
+    @keyframes hero-shine {
+      0%   { transform: translateX(-120%) skewX(-18deg); }
+      100% { transform: translateX(200vw)  skewX(-18deg); }
+    }
+
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* シャイン */
+    .hero__shine {
+      position: absolute;
+      top: 0; left: 0;
+      width: 80px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+      transform: translateX(-120%) skewX(-18deg);
+      animation: hero-shine 1.2s ease 0.4s forwards;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* タイトル行 */
+    .hero__title-line {
+      display: block;
+      opacity: 0;
+      animation: hero-line-in 0.65s ease forwards;
+    }
+
+    /* 各要素の登場タイミング */
+    .hero--anim-1 { opacity: 0; animation: hero-fade-up 0.5s ease 0.1s forwards; }
+    .hero--anim-2 { animation-delay: 0.35s; }
+    .hero--anim-3 { animation-delay: 0.65s; }
+    .hero--anim-4 { animation-delay: 0.95s; }
+    .hero--anim-5 { opacity: 0; animation: hero-fade-up 0.6s ease 1.3s forwards; }
+    .hero--anim-6 { opacity: 0; animation: hero-fade-up 0.6s ease 1.6s forwards; }
 
     .hero__title {
       font-size: 2.2rem;
@@ -537,11 +633,12 @@
       width: 100%;
       max-width: 700px;
       mix-blend-mode: multiply;
-      transition: transform 0.35s ease;
+      animation: float-img 3.8s ease-in-out 1.8s infinite;
     }
 
     .hero__sample-img:hover {
-      transform: translateY(-8px) scale(1.03);
+      animation-play-state: paused;
+      transform: scale(1.04);
     }
 
     /* ヒーロー スタンプ4枚 */
@@ -593,19 +690,20 @@
 
   <!-- ① ヒーロー -->
   <section id="hero" class="hero">
+    <div class="hero__shine"></div>
     <div class="container">
       <div class="hero__inner">
-        <div class="hero__badge">🐾 期間限定特典</div>
+        <div class="hero__badge hero--anim-1">🐾 期間限定特典</div>
         <h1 class="hero__title">
-          あなたの愛犬が、<br>
-          <span class="hero__title--accent">世界に一つだけの</span><br>
-          <span class="hero__title--main">LINEスタンプ風デザイン</span>に！
+          <span class="hero__title-line hero--anim-2">あなたの愛犬が、</span>
+          <span class="hero__title-line hero--anim-3"><span class="hero__title--accent">世界に一つだけの</span></span>
+          <span class="hero__title-line hero--anim-4"><span class="hero__title--main">LINEスタンプ風デザイン</span>に！</span>
         </h1>
-        <p class="hero__sub">
+        <p class="hero__sub hero--anim-5">
           わんグルにクチコミを書くだけで<br>
           オリジナルスタンプが<strong>無料</strong>でもらえる！
         </p>
-        <p class="hero__ok">✍️ 一言の感想でもOK！短いクチコミでも大丈夫です</p>
+        <p class="hero__ok hero--anim-6">✍️ 一言の感想でもOK！短いクチコミでも大丈夫です</p>
 
         <img src="assets/stamp-hero.png" alt="愛犬のスタンプサンプル例" class="hero__sample-img">
 
@@ -625,7 +723,6 @@
     <div class="container">
       <h2 class="section-title">🎁 もらえる<span>特典</span></h2>
       <div class="benefit-card card">
-        <div class="benefit-card__icon">🐶</div>
         <div class="benefit-card__body">
           <h3 class="benefit-card__title">愛犬のオリジナルスタンプ</h3>
           <p class="benefit-card__text">
@@ -823,7 +920,7 @@
       });
     }, { threshold: 0.15 });
 
-    document.querySelectorAll('.card, .step-item, .section-title').forEach(el => {
+    document.querySelectorAll('.card, .step-item, .section-title, .style-block').forEach(el => {
       el.classList.add('fade-in');
       observer.observe(el);
     });
