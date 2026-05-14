@@ -18,29 +18,28 @@
       width: 100%;
       max-width: 1200px;
       background-color: #FF8C69;
+      background-image: url('assets/stamplp-banner-wide.png');
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: multiply;
       border-radius: 16px;
       overflow: hidden;
       text-decoration: none;
       position: relative;
       box-shadow: 0 6px 28px rgba(255,140,105,0.35);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      /* アスペクト比を画像に合わせる */
+      aspect-ratio: 1200 / 280;
     }
     .banner:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(255,140,105,0.5);
     }
-
-    .banner img {
-      display: block;
-      width: 100%;
-      height: auto;
-      mix-blend-mode: multiply;
-    }
   </style>
 </head>
 <body>
-  <a href="https://nishiyan24.github.io/wanguru-stamp-lp/" target="_blank" class="banner">
-    <img src="assets/stamplp-banner-wide.png" alt="あなたの愛犬が世界に一つだけのスタンプに！期間限定無料プレゼント | わんグル">
+  <a href="https://nishiyan24.github.io/wanguru-stamp-lp/" target="_blank" class="banner"
+     aria-label="あなたの愛犬が世界に一つだけのスタンプに！期間限定無料プレゼント | わんグル">
   </a>
 </body>
 </html>
