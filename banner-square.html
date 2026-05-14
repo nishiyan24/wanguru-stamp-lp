@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>わんグル バナー②正方形</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; font-family: 'Noto Sans JP', sans-serif; background: transparent; }
+
+    :root {
+      --main:      #FF8C69;
+      --main-dark: #E06A45;
+      --accent:    #A8D5A2;
+      --text:      #4A3728;
+    }
+
+    @keyframes pulse-badge {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.06); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes btn-shine {
+      0%        { left: -80px; opacity: 0; }
+      15%       { opacity: 1; }
+      60%, 100% { left: 110%; opacity: 0; }
+    }
+
+    .banner {
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(160deg, #FFF8F0 0%, #FFE8D6 50%, #FFDEC8 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 36px 36px;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(255,140,105,0.28);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .banner:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 44px rgba(255,140,105,0.4);
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(168,213,162,0.22);
+      pointer-events: none;
+    }
+    .banner::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,140,105,0.12);
+      pointer-events: none;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, var(--main-dark), #ff6b3d);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 900;
+      padding: 6px 20px;
+      border-radius: 50px;
+      box-shadow: 0 3px 12px rgba(224,106,69,0.35);
+      animation: pulse-badge 2.5s ease-in-out infinite;
+    }
+    .title {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .title .accent { color: var(--main-dark); }
+    .title .big { font-size: 2.4rem; display: block; }
+
+    .img-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding: 10px 0;
+    }
+    .img-wrap img {
+      max-width: 88%;
+      max-height: 300px;
+      mix-blend-mode: multiply;
+      animation: float 4s ease-in-out 0.5s infinite;
+    }
+
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+    .checks {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .checks span {
+      background: rgba(168,213,162,0.35);
+      color: #3a6e35;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--main), var(--main-dark));
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 900;
+      padding: 16px 40px;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(255,140,105,0.45);
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80px;
+      width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: btn-shine 3.5s ease-in-out 1.5s infinite;
+    }
+
+    @media (max-width: 500px) {
+      .title { font-size: 1.5rem; }
+      .title .big { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="https://nishiyan24.github.io/wanguru-stamp-lp/" target="_blank" class="banner">
+    <div class="top">
+      <div class="ribbon">🐾 期間限定・完全無料プレゼント</div>
+      <p class="title">
+        あなたの愛犬が<br>
+        <span class="accent big">世界に一つだけの</span>
+        スタンプになる！
+      </p>
+    </div>
+    <div class="img-wrap">
+      <img src="assets/stamp-hero-3.png" alt="愛犬のオリジナルスタンプサンプル">
+    </div>
+    <div class="bottom">
+      <div class="checks">
+        <span>✅ 完全無料</span>
+        <span>✅ 申込み60秒</span>
+        <span>✅ 写真1枚でOK</span>
+      </div>
+      <div class="btn">🎁 今すぐ無料でスタンプを作る ▶</div>
+    </div>
+  </a>
+</body>
+</html>
