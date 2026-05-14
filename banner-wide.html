@@ -6,7 +6,7 @@
   <title>わんグル バナー①横長</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; background: transparent; }
+    html, body { width: 100%; background: transparent; margin: 0; padding: 0; }
 
     .banner {
       display: block;
@@ -35,7 +35,8 @@
   </a>
   <script>
     function sendHeight() {
-      var h = document.body.scrollHeight;
+      var banner = document.querySelector('.banner');
+      var h = banner ? Math.ceil(banner.getBoundingClientRect().height) : document.body.scrollHeight;
       window.parent.postMessage({ iframeHeight: h }, '*');
     }
     window.addEventListener('load', sendHeight);
