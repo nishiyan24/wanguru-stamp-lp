@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>わんグル スタンプ特典 バナー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== リセット・共通 ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f0f0f0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .banner-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #888;
+      text-align: center;
+      margin-bottom: -50px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== カラー変数 ===== */
+    :root {
+      --main:      #FF8C69;
+      --main-dark: #E06A45;
+      --accent:    #A8D5A2;
+      --text:      #4A3728;
+      --bg:        #FFF8F0;
+      --white:     #FFFFFF;
+    }
+
+    /* ===== 共通アニメーション ===== */
+    @keyframes pulse-badge {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.06); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes btn-shine {
+      0%        { left: -80px; opacity: 0; }
+      15%       { opacity: 1; }
+      60%, 100% { left: 110%; opacity: 0; }
+    }
+
+    /* ======================================
+       バナー① 横長（1200×280px）
+    ====================================== */
+    .banner-wide {
+      width: 100%;
+      max-width: 1200px;
+      height: 280px;
+      background:
+        radial-gradient(circle, rgba(255,140,105,0.12) 1.5px, transparent 1.5px),
+        linear-gradient(120deg, #FFF3EE 0%, #FFE0CC 55%, #FF8C69 100%);
+      background-size: 24px 24px, 100% 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(255,140,105,0.28);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .banner-wide:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(255,140,105,0.38);
+    }
+
+    /* 左：装飾円 */
+    .banner-wide::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      pointer-events: none;
+    }
+
+    .bw-left {
+      flex: 1;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bw-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--main-dark);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      animation: pulse-badge 2.5s ease-in-out infinite;
+    }
+
+    .bw-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .bw-title .accent { color: var(--main-dark); }
+
+    .bw-sub {
+      font-size: 0.9rem;
+      color: #6b4e3d;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bw-sub span {
+      background: rgba(168,213,162,0.4);
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-weight: 700;
+    }
+
+    .bw-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--main-dark);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      padding: 13px 28px;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(224,106,69,0.4);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .banner-wide:hover .bw-btn {
+      background: #c95530;
+      transform: translateY(-1px);
+    }
+    .bw-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80px;
+      width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      animation: btn-shine 3s ease-in-out 1s infinite;
+    }
+    .bw-btn .arrow { font-size: 1.1rem; }
+
+    .bw-right {
+      width: 340px;
+      height: 100%;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bw-right img {
+      height: 260px;
+      width: auto;
+      mix-blend-mode: multiply;
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ======================================
+       バナー② 正方形（1200×1200px）
+    ====================================== */
+    .banner-square {
+      width: 100%;
+      max-width: 600px; /* 表示用に縮小、実寸1200px */
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(160deg, #FFF8F0 0%, #FFE8D6 50%, #FFDEC8 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 36px 36px;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(255,140,105,0.28);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .banner-square:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 44px rgba(255,140,105,0.4);
+    }
+
+    /* 装飾円 */
+    .banner-square::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(168,213,162,0.22);
+      pointer-events: none;
+    }
+    .banner-square::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,140,105,0.12);
+      pointer-events: none;
+    }
+
+    .bs-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bs-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, var(--main-dark), #ff6b3d);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 900;
+      padding: 6px 20px;
+      border-radius: 50px;
+      box-shadow: 0 3px 12px rgba(224,106,69,0.35);
+      animation: pulse-badge 2.5s ease-in-out infinite;
+    }
+
+    .bs-title {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.35;
+      text-align: center;
+      color: var(--text);
+    }
+    .bs-title .accent { color: var(--main-dark); }
+    .bs-title .big {
+      font-size: 2.4rem;
+      display: block;
+    }
+
+    .bs-img {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding: 10px 0;
+    }
+    .bs-img img {
+      max-width: 88%;
+      max-height: 300px;
+      mix-blend-mode: multiply;
+      animation: float 4s ease-in-out 0.5s infinite;
+    }
+
+    .bs-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .bs-checks {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .bs-checks span {
+      background: rgba(168,213,162,0.35);
+      color: #3a6e35;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+
+    .bs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--main), var(--main-dark));
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 900;
+      padding: 16px 40px;
+      border-radius: 50px;
+      box-shadow: 0 6px 20px rgba(255,140,105,0.45);
+      width: 100%;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .banner-square:hover .bs-btn {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255,140,105,0.5);
+    }
+    .bs-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80px;
+      width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: btn-shine 3.5s ease-in-out 1.5s infinite;
+    }
+
+    /* ======================================
+       バナー③ 縦長（600×800px）
+    ====================================== */
+    .banner-tall {
+      width: 100%;
+      max-width: 400px; /* 表示用、実寸600px */
+      aspect-ratio: 3 / 4;
+      background: linear-gradient(175deg, #FFF8F0 0%, #FFE8D6 60%, #FF8C69 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 28px 32px;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(255,140,105,0.3);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .banner-tall:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 44px rgba(255,140,105,0.42);
+    }
+
+    /* 斜めリボン（右上） */
+    .bt-ribbon-wrap {
+      position: absolute;
+      top: 0; right: 0;
+      width: 110px; height: 110px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .bt-ribbon {
+      position: absolute;
+      top: 24px; right: -30px;
+      width: 150px;
+      background: var(--main-dark);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-align: center;
+      padding: 5px 0;
+      transform: rotate(45deg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: 0.05em;
+    }
+
+    /* 装飾円 */
+    .banner-tall::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      pointer-events: none;
+    }
+
+    .bt-badge {
+      margin-top: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--main-dark);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 900;
+      padding: 6px 18px;
+      border-radius: 50px;
+      box-shadow: 0 3px 10px rgba(224,106,69,0.35);
+      position: relative;
+      z-index: 1;
+      animation: pulse-badge 2.5s ease-in-out infinite;
+    }
+
+    .bt-img {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .bt-img img {
+      width: 100%;
+      max-width: 340px;
+      mix-blend-mode: multiply;
+      animation: float 3.8s ease-in-out 0.8s infinite;
+    }
+
+    .bt-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      line-height: 1.4;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .bt-title .accent { color: var(--main-dark); }
+
+    .bt-checks {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .bt-checks span {
+      background: rgba(168,213,162,0.4);
+      color: #3a6e35;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 50px;
+    }
+
+    .bt-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--main), var(--main-dark));
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 900;
+      padding: 15px 0;
+      border-radius: 50px;
+      width: 100%;
+      box-shadow: 0 5px 18px rgba(255,140,105,0.45);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .banner-tall:hover .bt-btn {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,140,105,0.55);
+    }
+    .bt-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80px;
+      width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: btn-shine 3.5s ease-in-out 2s infinite;
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 700px) {
+      .banner-wide {
+        height: auto;
+        flex-direction: column;
+        padding: 28px 24px;
+        text-align: center;
+      }
+      .bw-left { padding: 0; }
+      .bw-sub { justify-content: center; }
+      .bw-right {
+        width: 100%;
+        height: 180px;
+      }
+      .bw-right img { height: 160px; }
+      .bw-title { font-size: 1.35rem; }
+
+      .banner-square { max-width: 100%; }
+      .bs-title { font-size: 1.5rem; }
+      .bs-title .big { font-size: 1.8rem; }
+
+      .banner-tall { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <p class="banner-label">① 横長バナー（PCメイン / 1200×280px）</p>
+
+  <!-- ① 横長バナー -->
+  <a href="index.html" class="banner-wide">
+    <div class="bw-left">
+      <div class="bw-badge">🎀 期間限定・無料プレゼント</div>
+      <p class="bw-title">
+        あなたの愛犬が、<br>
+        <span class="accent">世界に一つだけの</span>スタンプに！
+      </p>
+      <p class="bw-sub">
+        <span>✅ 完全無料</span>
+        <span>✅ 申込み60秒</span>
+        <span>✅ 写真1枚でOK</span>
+      </p>
+      <div class="bw-btn">
+        🎁 今すぐ無料で作る
+        <span class="arrow">▶</span>
+      </div>
+    </div>
+    <div class="bw-right">
+      <img src="assets/stamp-hero-3.png" alt="愛犬のオリジナルスタンプサンプル">
+    </div>
+  </a>
+
+  <p class="banner-label">② 正方形バナー（SNS・アイキャッチ / 1200×1200px）</p>
+
+  <!-- ② 正方形バナー -->
+  <a href="index.html" class="banner-square">
+    <div class="bs-top">
+      <div class="bs-ribbon">🐾 期間限定・完全無料プレゼント</div>
+      <p class="bs-title">
+        あなたの愛犬が<br>
+        <span class="accent big">世界に一つだけの</span>
+        スタンプになる！
+      </p>
+    </div>
+    <div class="bs-img">
+      <img src="assets/stamp-hero-3.png" alt="愛犬のオリジナルスタンプサンプル">
+    </div>
+    <div class="bs-bottom">
+      <div class="bs-checks">
+        <span>✅ 完全無料</span>
+        <span>✅ 申込み60秒</span>
+        <span>✅ 写真1枚でOK</span>
+      </div>
+      <div class="bs-btn">
+        🎁 今すぐ無料でスタンプを作る ▶
+      </div>
+    </div>
+  </a>
+
+  <p class="banner-label">③ 縦長バナー（スマホ・サイドバナー / 600×800px）</p>
+
+  <!-- ③ 縦長バナー -->
+  <a href="index.html" class="banner-tall">
+    <div class="bt-ribbon-wrap">
+      <div class="bt-ribbon">期間限定</div>
+    </div>
+    <div class="bt-badge">🎀 無料プレゼント実施中！</div>
+    <div class="bt-img">
+      <img src="assets/stamp-hero-3.png" alt="愛犬のオリジナルスタンプサンプル">
+    </div>
+    <p class="bt-title">
+      あなたの愛犬が<br>
+      <span class="accent">世界に一つだけの</span><br>
+      スタンプになる！
+    </p>
+    <div class="bt-checks">
+      <span>✅ 完全無料</span>
+      <span>✅ 写真1枚でOK</span>
+      <span>✅ 申込み60秒</span>
+    </div>
+    <div class="bt-btn">
+      🎁 今すぐ無料で作る ▶
+    </div>
+  </a>
+
+</body>
+</html>
